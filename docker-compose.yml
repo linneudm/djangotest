@@ -1,0 +1,39 @@
+version: '3.3'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: ng02
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/webapps
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./djangotest/core/static:/webapps/static
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: dg02
+    command: bash -c "python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && gunicorn djangotest.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - .:/webapps/
+      - ./djangotest/core/static:/webapps/static
+    #expose:
+      #- "8000"
+  db:
+    image: postgres:latest
+    container_name: ps02
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+#    ports:
+#      - "8000:8000"
+#    links:
+#      - db
+  # Postgres
+
