@@ -22,6 +22,10 @@ class Operation(models.Model):
 	status = models.CharField('Operação', max_length=10, choices=STATUS_CHOICES, default=INPUT)
 	quantity = models.PositiveIntegerField('Quantidade', default=0)
 
+	def clean(self):
+		if self.product.quantity < self.quantity:
+			raise ValidationError("Nao ha estoque suficiente =(")
+
 	#Funcao que retorna o custo total da operacao
 	def total_price(self):
 		return self.product.price * self.quantity
