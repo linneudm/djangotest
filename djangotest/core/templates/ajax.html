@@ -1,0 +1,132 @@
+<script>
+//Função que trata os erros recebidos das requisições    
+function statusResponses(statusCode, request){
+    console.log(statusCode);
+    console.log(request)
+    if(statusCode == "201" && request == "post"){
+        return "Item adicionado com sucesso!";
+    }
+    if(statusCode == "409" && request == "post"){
+        return "Estoque insuficiente!";
+    }
+    else if(statusCode == 204 && request == "delete"){
+        return "Item removido com sucesso!";
+    }
+    else if(statusCode == undefined && request == "post"){
+        return "Preencha o campo vazio!";
+    }
+
+    else if(statusCode == "400" && request == "post"){
+        return "Escolha uma opção válida ou preencha os campos vazios!";
+    }
+    else if(statusCode == "403"){
+        return "Você precisa estar logado para realizar esta ação.";   
+    }
+    else{
+        return "Houve um erro ao solicitar esta requisição.";
+    }
+
+}
+
+$(document).ready(function() {
+//AJAX para CRIAR um produto
+ $("#product").submit(function(event){
+    nm = $('#inputName').val()
+    price = $('#inputPrice').val()
+    var data = JSON.stringify({"name": nm,"picture":null,"price": price});
+        //console.log(data);
+        $.ajax({
+           type:"POST",
+           url:"api/products/",
+           contentType: "application/json; charset=utf-8",
+           beforeSend: function (xhr, settings) {
+            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        },
+        dataType: "json",
+        data: data,
+        success: function(data, textStatus, xhr){
+            $('#error').html("<div class='alert alert-success text-center' role='alert'>" + statusResponses(xhr.status, "post") + "</div>");
+            $("#list").load(location.href + " #list");
+            $("#list2").load(location.href + " #list2");
+            $("#list3").load(location.href + " #list3");
+        },
+        error: function(data, textStatus, xhr){
+            $('#error').html("<div class='alert alert-danger text-center' role='alert'>" + statusResponses(xhr.status, "post") + "</div>");
+        }
+    });
+        return false;
+    });
+
+}); 
+//AJAX para DELETAR um produto
+function deleteProduct(id){
+    $.ajax({
+       type:"DELETE",
+       url:"api/products/"+id,
+       beforeSend: function (xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+    },
+    success: function(data, textStatus, xhr){
+        $('#error').html("<div class='alert alert-success text-center' role='alert'>"+ statusResponses(xhr.status, "delete") +"</div>");
+        $("#list").load(location.href + " #list");
+        $("#list2").load(location.href + " #list2");
+        $("#list3").load(location.href + " #list3");
+    },
+    error: function(data, textStatus, xhr){
+        $('#error').html("<div class='alert alert-danger text-center' role='alert'>"+ statusResponses(xhr.status, "delete") + "</div>");
+    }
+});
+}
+
+$(document).ready(function() {
+//AJAX para CRIAR uma OPERAÇÃO
+ $("#operation").submit(function(event){
+    nm = $('#inputProduct').val();
+    qtt = $('#inputQuantity').val();
+    status = $('#inputStatus').val();
+    var data = JSON.stringify({"product": nm,"quantity": qtt, "status": status});
+    $.ajax({
+       type:"POST",
+       url:"api/operations/",
+       contentType: "application/json; charset=utf-8",
+       beforeSend: function (xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+    },
+    dataType: "json",
+    data: data,
+    success: function(data, textStatus, xhr){
+        $('#error2').html("<div class='alert alert-success text-center' role='alert'>" + statusResponses(xhr.status, "post") + "</div>");
+        $("#list").load(location.href + " #list");
+        $("#list2").load(location.href + " #list2");
+        $("#list3").load(location.href + " #list3");
+    },
+    error: function(data, textStatus, xhr){
+        $('#error2').html("<div class='alert alert-danger text-center' role='alert'>" + statusResponses(data.status, "post") + "</div>");
+    }
+});
+    return false;
+});
+
+}); 
+//AJAX para DELETAR uma OPERAÇÃO
+function deleteOperation(id){
+    $.ajax({
+       type:"DELETE",
+       url:"api/operations/"+id,
+       beforeSend: function (xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+    },
+    success: function(data, textStatus, xhr){
+        $('#error2').html("<div class='alert alert-success text-center' role='alert'>"+ statusResponses(xhr.status, "delete") +"</div>");
+        $("#list").load(location.href + " #list");
+        $("#list2").load(location.href + " #list2");
+        $("#list3").load(location.href + " #list3");
+    },
+    error: function(data, textStatus, xhr){
+        $('#error2').html("<div class='alert alert-danger text-center' role='alert'>"+ statusResponses(data.status, "delete") + "</div>");
+    }
+});
+}
+
+
+</script>

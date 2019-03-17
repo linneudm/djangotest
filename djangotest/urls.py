@@ -22,6 +22,7 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 from djangotest.core import urls as core_urls
+from djangotest.account import urls as account_urls
 
 #Viewsets
 from djangotest.product.api.viewsets import ProductViewSet, OperationViewSet
@@ -33,11 +34,12 @@ router.register(r'products', ProductViewSet, base_name='Product')
 router.register(r'operations', OperationViewSet, base_name='Operation')
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('home/', include(core_urls, namespace='core')),
+    path('api/', include(router.urls)),
+    path('', include(core_urls, namespace='core')),
     path('api-token-auth/', obtain_auth_token),
     path('admin/', admin.site.urls),
+    path('accounts/', include(account_urls, namespace='accounts')),
 ]
-
+#O proprio django servira os arquivos estáticos caso a aplicação esteja em modo Debug
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

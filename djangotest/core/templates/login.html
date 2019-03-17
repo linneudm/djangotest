@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+		<div class="row align-items-center">
+			<div class="mt-4 col-md-6 col-sm-10 col-xs-12 mx-auto align-middle">
+				<form method="post" class="form-signin"> {% csrf_token %}
+					<h1 class="text-center">Login</h1>
+					{% if form.errors %}
+					{% for error in form.non_field_errors %}
+					<div class="alert alert-danger" role="alert">
+						{{ error }}
+					</div>
+					{% endfor %}
+					{% endif %}
+
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1"><i class="fa fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Usuário" aria-label="Usuário" name="username" id="inputUsername">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1"><i class="fa fa-lock"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="Senha" aria-label="Senha" name="password" id="inputPassword">
+					</div>
+
+					<button type="submit" class="btn btn-block btn-outline-success">Entrar</button>
+					<a class="btn btn-block btn-outline-primary" href="{% url 'core:index' %}">Início</a>
+
+				</form>
+			</div>
+		</div>
+</div>
+
+{% endblock %}

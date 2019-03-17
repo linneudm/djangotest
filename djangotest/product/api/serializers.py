@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer, ValidationError
 from djangotest.product.models import Product, Operation
 
 
+#Serialização dos dados
 class ProductSerializer(ModelSerializer):
 	class Meta:
 		model = Product
@@ -10,10 +11,4 @@ class ProductSerializer(ModelSerializer):
 class OperationSerializer(ModelSerializer):
 	class Meta:
 		model = Operation
-		fields = ('id', 'user', 'product', 'created_on', 'status', 'quantity')
-#product = ProductSerializer()
-'''
-	def validate(self, data):
-		if data['product_quantity'] < data['quantity']:
-			raise ValidationError('Sem estoque suficiente!')
-'''
+		fields = ('id', 'product', 'created_on', 'status', 'quantity')

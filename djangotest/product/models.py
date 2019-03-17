@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Product(models.Model):
-	name = models.CharField('Nome', max_length=250)
+	name = models.CharField('Nome', max_length=250, null=False, blank=False)
 	picture = models.ImageField('Ilustração', upload_to="poducts", null = True, blank = True)
 	price = models.DecimalField('Preco Unitário', max_digits=10, decimal_places=2)
 	quantity = models.PositiveIntegerField('Quantidade', default=0)
@@ -22,10 +22,6 @@ class Operation(models.Model):
 	status = models.CharField('Operação', max_length=10, choices=STATUS_CHOICES, default=INPUT)
 	quantity = models.PositiveIntegerField('Quantidade', default=0)
 
-	def clean(self):
-		if self.product.quantity < self.quantity:
-			raise ValidationError("Nao ha estoque suficiente =(")
-
 	#Funcao que retorna o custo total da operacao
 	def total_price(self):
 		return self.product.price * self.quantity
@@ -34,6 +30,21 @@ class Operation(models.Model):
 	def __str__(self):
 		name = (self.status + " - " + (self.created_on.strftime("%d/%m/%Y às %H:%M:%S")))
 		return name
+
+	#Verifica o estoque do produto antes de fazer a retirada do mesmo para entao efetuar o save.
+	def delete(self, *args, **kwargs):
+		product = Product.objects.get(id=self.product.id)
+		if(self.status == "Saída"):
+			status = True
+		else:
+			status = False
+			
+		if(status):
+			product.quantity += self.quantity
+		else:
+			product.quantity -= self.quantity
+		product.save()
+		super(Operation, self).delete(*args, **kwargs)
 
 	def save(self, *args, **kwargs):
 		product = Product.objects.get(id=self.product.id)
@@ -50,16 +61,3 @@ class Operation(models.Model):
 				product.quantity += self.quantity
 			product.save()
 			super(Operation, self).save(*args, **kwargs)
-
-	def delete(self, *args, **kwargs):
-		product = Product.objects.get(id=self.product.id)
-		if(self.status == "Saída"):
-			status = True
-		else:
-			status = False
-		if(status):
-			product.quantity += self.quantity
-		else:
-			product.quantity -= self.quantity
-		product.save()
-		super(Operation, self).delete(*args, **kwargs)
