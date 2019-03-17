@@ -21,8 +21,11 @@ from django.conf import settings
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
+from djangotest.core import urls as core_urls
+
 #Viewsets
 from djangotest.product.api.viewsets import ProductViewSet, OperationViewSet
+
 
 #Registro das rotas
 router = routers.DefaultRouter()
@@ -31,9 +34,10 @@ router.register(r'operations', OperationViewSet, base_name='Operation')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('home/', include(core_urls, namespace='core')),
     path('api-token-auth/', obtain_auth_token),
     path('admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:
-	urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

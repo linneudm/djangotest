@@ -34,3 +34,32 @@ class Operation(models.Model):
 	def __str__(self):
 		name = (self.status + " - " + (self.created_on.strftime("%d/%m/%Y às %H:%M:%S")))
 		return name
+
+	def save(self, *args, **kwargs):
+		product = Product.objects.get(id=self.product.id)
+		if(self.status == "Saída"):
+			status = True
+		else:
+			status = False
+		if(self.quantity > product.quantity and status):
+			return None
+		else:
+			if(status):
+				product.quantity -= self.quantity
+			else:
+				product.quantity += self.quantity
+			product.save()
+			super(Operation, self).save(*args, **kwargs)
+
+	def delete(self, *args, **kwargs):
+		product = Product.objects.get(id=self.product.id)
+		if(self.status == "Saída"):
+			status = True
+		else:
+			status = False
+		if(status):
+			product.quantity += self.quantity
+		else:
+			product.quantity -= self.quantity
+		product.save()
+		super(Operation, self).delete(*args, **kwargs)
