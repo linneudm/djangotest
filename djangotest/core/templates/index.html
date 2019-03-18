@@ -86,23 +86,25 @@
 					<input type="text" class="form-control" placeholder="Quantidade" aria-label="Quantidade" name="quantity" id="inputQuantity">
 				</div>
 				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">Status</span>
-					</div>
-					<input type="text" class="form-control" placeholder="Status" aria-label="Status" name="status" id="inputStatus">
+				  <div class="input-group-prepend">
+				    <label class="input-group-text" for="inputGroupSelect01">Status</label>
+				  </div>
+				  <select id="inputStatus" class="custom-select">
+				    <option selected>Escolha</option>
+				    <option value="Entrada">Entrada</option>
+				    <option value="Saída">Saída</option>
+				  </select>
 				</div>
-
 				<button type="submit" class="btn btn-block btn-outline-success">Cadastrar</button>
 
 			</form>
 			<table id="list2" class="mt-4 table table-bordered">
 				<thead>
 					<tr>
-						<th scope="col" width="5%">#</th>
-						<th scope="col" width="60%">Produto</th>
+						<th scope="col" width="10%">#</th>
+						<th scope="col" width="70%">Produto</th>
 						<th scope="col" width="10%">Quantidade</th>
-						<th scope="col" width="10%">Custo</th>
-						<th scope="col" width="5%">#</th>
+						<th scope="col" width="10%">#</th>
 					</tr>
 				</thead>
 				<tbody>

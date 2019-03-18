@@ -20,4 +20,4 @@ ADD . /webapps/
 EXPOSE 8000
 
 # start supervisor
-#CMD (cd /webapps/ && /usr/local/bin/honcho start)
+CMD (cd /webapps/ && /usr/local/bin/honcho start)
