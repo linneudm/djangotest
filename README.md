@@ -1,4 +1,5 @@
 # Django Test App
+[![Requirements Status](https://requires.io/github/linneudm/djangotest/requirements.svg?branch=master)](https://requires.io/github/linneudm/djangotest/requirements/?branch=master)
 
 Esta é uma aplicação feita para testar os conhecimentos em Django, Django Rest Framework e Docker.
 
