@@ -34,7 +34,7 @@ router.register(r'products', ProductViewSet, base_name='Product')
 router.register(r'operations', OperationViewSet, base_name='Operation')
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('api/v1/', include(router.urls)),
     path('', include(core_urls, namespace='core')),
     path('api-token-auth/', obtain_auth_token),
     path('admin/', admin.site.urls),

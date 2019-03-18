@@ -14,6 +14,7 @@ class ProductViewSet(ModelViewSet):
     #Campos disponíveis na pesquisa
     filter_fields = ('name',)
     #Se o usuário não estiver logado, ele só podera visualizar
+    http_method_names = ['get', 'post', 'patch', 'delete']
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
@@ -42,7 +43,7 @@ class OperationViewSet(ModelViewSet):
     filter_backends = (SearchFilter,)
     search_fields = ('product__name','status',)
     #Limita as requisições HTTP
-    http_method_names = ['get', 'post', 'head', 'delete']
+    http_method_names = ['get', 'post', 'delete']
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def create(self, request, *args, **kwargs):

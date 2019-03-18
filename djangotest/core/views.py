@@ -6,8 +6,8 @@ import json
 
 #Index consome a API e resgata todos os produtos e operações disponíveis
 def index(request):
-	url = 'http://localhost:8000/api/products/' 
-	url2 = 'http://localhost:8000/api/operations/' 
+	url = 'http://localhost:8000/api/v1/products/' 
+	url2 = 'http://localhost:8000/api/v1/operations/' 
 	r = requests.get(url)
 	r2 = requests.get(url2)
 	items = r.json()
