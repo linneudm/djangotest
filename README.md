@@ -1,5 +1,7 @@
 # Django Test App
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/63a0119f3e514bdda67a41d0e53687c6)](https://app.codacy.com/app/linneudm/djangotest?utm_source=github.com&utm_medium=referral&utm_content=linneudm/djangotest&utm_campaign=Badge_Grade_Dashboard)
+
 Esta é uma aplicação feita para testar os conhecimentos em Django, Django Rest Framework e Docker.
 
 ### Tecnologias Utilizadas
