@@ -36,7 +36,8 @@ class ProductViewSet(ModelViewSet):
 '''
 
 class OperationViewSet(ModelViewSet):
-
+    
+    queryset = Operation.objects.all()
     serializer_class = OperationSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('product__name','status',)
