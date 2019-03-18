@@ -6,7 +6,7 @@
 
 Esta é uma aplicação feita para testar os conhecimentos em Django, Django Rest Framework e Docker.
 
-Toda a documentação está disponível no diretório "``docs``" e online no link https://djangotest-piaui.readthedocs.io/en/latest/. Se você quer construir essa aplicação na sua máquina, recomendo que a leia.
+Toda a documentação está disponível no diretório "``docs``" e online no link (https://djangotest-piaui.readthedocs.io/en/latest/). Se você quer construir essa aplicação na sua máquina, recomendo que a leia.
 
 ### Tecnologias Utilizadas
 
