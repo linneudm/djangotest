@@ -28,4 +28,10 @@ Para acessar a aplicação e utilizar da rotina da API, será necessário fazer 
 A aplicação também está disponível no Heroku através do link:
 https://djangopiaui.herokuapp.com
 
+Para efetuar login, utilize as seguintes informações:
+```sh
+ Usuário: admin
+ Senha: 12345infog2
+```
+
 **Desenvolvido por [Linneu Lopes](https://github.com/LinneuDM)**
