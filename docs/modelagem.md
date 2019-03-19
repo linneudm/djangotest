@@ -1,9 +1,8 @@
-
-
 # Modelagem
 
 ## Diagrama de Casos de Uso
 ![DIagrama de Casos de Uso](http://i731.photobucket.com/albums/ww311/LinneuDM/casosdeuso-djangotest1_1.jpeg)
+
 ### Atores
 
      1. Usuário Autenticado: Usuário cujas credenciais foram cadastradas previamente;
@@ -21,16 +20,19 @@
 
 ## Diagrama de Entidade Relacionamento (DER)
 ![Diagrama de Entidade Relacionamento](https://i731.photobucket.com/albums/ww311/LinneuDM/der-djangotest1.jpeg)
+
 ### Entidades
 
  **1. Produto**
  Atributos: nome, preço e estoque
+
  **2. Operação**
  Atributos: autor, data, tipo e quantidade
 
 ## Diagrama de Classes (UML)
 ![Diagrama de Classes](https://i731.photobucket.com/albums/ww311/LinneuDM/classes-djangotest.jpeg)
-**1. Product**
+
+**1. Product**:
 Classe que mantém as informações acerca de um produto.
 Atributos:
 
@@ -38,13 +40,15 @@ Atributos:
  2. *price*: do tipo *Float*. Guarda o preço unitário do produto.
  3. *stock*: do tipo *Integer*. Mantém a informação da quantidade de produtos existente em estoque.
  
- **2. Operation**
+ **2. Operation**:
 Classe que mantém as informações acerca das operações relacionadas a um determinado produto.
+
 Atributos:
 1. *author*: do tipo *User*. É a chave estrangeira para o autor da operação.
 2. *product*: do tipo *Product*. É a chave estrangeira para o produto a qual a operação está sendo feita.
 3. *date*: do tipo *Date*. Armazena a data em que foi realizada a operação.
 4. *typeOperation*: do tipo *String*. Guarda a natureza da operação. Possíveis valores: Entrada - quando a operação visa renovar o estoque de um produto. Saída - quando a operação visa cadastrar a retirada de um produto do estoque.
 5. *quantity*: do tipo *Integer*. Este campo armazena a quantidade de produtos que está sendo colocada ou retirada do estoque.
+
 Métodos:
 - *totalPrice()*: este método calcula o custo total da operação - *quantidade de produtos x valor do produto*.

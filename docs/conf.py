@@ -184,12 +184,12 @@ epub_title = project
 epub_exclude_files = ['search.html']
 
 
-github_doc_root = 'https://github.com/rtfd/recommonmark/tree/master/docs/'
+#github_doc_root = 'https://github.com/rtfd/recommonmark/tree/master/docs/'
 
 # At the bottom of conf.py
 def setup(app):
     app.add_config_value('recommonmark_config', {
-            'url_resolver': lambda url: github_doc_root + url,
+            #'url_resolver': lambda url: github_doc_root + url,
             'auto_toc_tree_section': 'Índice',
             }, True)
     app.add_transform(AutoStructify)
