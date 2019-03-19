@@ -20,7 +20,7 @@ Para consutrução desta aplicação, foram utilizadas as seguintes ferramentas:
 Para instalar a aplicação, basta executar o seguinte comando no terminal:
 
 ```sh
-$ docker-compose -up
+$ docker-compose up --build
 ```
 Prontinho, sua aplicação está rodando e poderá acessá-la localmente:
 http://localhost:8000
